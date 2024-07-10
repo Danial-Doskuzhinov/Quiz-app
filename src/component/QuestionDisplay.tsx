@@ -1,7 +1,9 @@
 import React from 'react';
+import QuizOptions from './QuizOptions';
+import QuizQuestion from './QuizQuestion';
 import type { QuestionDisplayProps } from '../../type';
-import HandleNextQuestion  from "../component/nextQuestion";
-const QuestionDisplay= ({
+
+const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     currentQuiz,
     currentQuestionIndex,
     selectedOption,
@@ -11,7 +13,9 @@ const QuestionDisplay= ({
     score,
     setScore,
     setCurrentQuestionIndex,
-}:QuestionDisplayProps) => {
+    setIsClick,
+    isClick
+}) => {
     const handleAnswerSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         const currentQuestion = currentQuiz?.questions[currentQuestionIndex];
@@ -19,51 +23,59 @@ const QuestionDisplay= ({
             setScore(score + 1);
         }
         setShowResult(true);
+        setIsClick(null)
     };
 
-
-
-    const renderQuizOptions = () => {
-        const currentQuestion = currentQuiz?.questions[currentQuestionIndex];
-        return currentQuestion?.options.map((option:string, index:number) => (
-            <div key={index}>
-                <input
-                    type="radio"
-                    id={`option${index}`}
-                    name="quizOption"
-                    value={option}
-                    checked={selectedOption === option}
-                    onChange={() => setSelectedOption(option)}
-            />
-                <label htmlFor={`option${index}`}>{option}</label>
-            </div>
-        ));
+    const handleNextQuestion = () => {
+        const nextIndex = currentQuestionIndex + 1;
+        if (currentQuiz) {
+            if (nextIndex < currentQuiz.questions.length) {
+                setCurrentQuestionIndex(nextIndex);
+                setSelectedOption('');
+                setShowResult(false);
+                setIsClick(null)
+                
+            } else {
+                setShowResult(true);
+            }
+        }
     };
+
+    if (!currentQuiz) return null;
+
+    const currentQuestion = currentQuiz.questions[currentQuestionIndex];
 
     return (
-        <div>
-            {currentQuiz && (
-                <div>
-                    <h2>{currentQuiz.title}</h2>
-                    {!showResult ? (
-                        <form onSubmit={handleAnswerSubmit}>
-                            <p>{`Question ${currentQuiz.questions[currentQuestionIndex + 1].question}`}</p>
-                            {renderQuizOptions()}
-                            <button type="submit">Submit</button>
-                        </form>
-                    ) : (
-                        <>
-                        
-                       <HandleNextQuestion  currentQuestionIndex={currentQuestionIndex}
-                       currentQuiz={currentQuiz}
-                       setCurrentQuestionIndex={setCurrentQuestionIndex}
-                       setSelectedOption={setSelectedOption}
-                       setShowResult={setShowResult}/>
-                       </>
-                    )}
-                    <p>Score: {score}</p>
-                </div>
-            )}
+        <div className="min-h-screen bg-gray-900 text-white p-8">
+            <div className="max-w-3xl mx-auto">
+                <h2 className="text-3xl font-bold mb-8">{currentQuiz.title}</h2>
+                <form onSubmit={handleAnswerSubmit}>
+                    <QuizQuestion
+                        question={currentQuestion.question}
+                        currentQuestionIndex={currentQuestionIndex}
+                        totalQuestions={currentQuiz.questions.length}
+                    />
+                    <QuizOptions
+                        options={currentQuestion.options}
+                        answer={currentQuestion.answer}
+                        selectedOption={selectedOption}
+                        showResult={showResult}
+                        onSelectOption={setSelectedOption}
+                        setIsClick={setIsClick}
+                        isClick={isClick}
+                    />
+                    {!showResult ? 
+                        <button type="submit" className="w-full p-4 bg-purple-600 rounded-lg text-white font-bold">
+                            Submit answer
+                        </button>
+                     : 
+                      <>  <button onClick={handleNextQuestion} className="w-full mt-4 p-4 bg-purple-600 rounded-lg text-white font-bold">
+                      Next Question
+                  </button></>
+                    }
+                </form>
+                <p className="mt-4 text-xl">Score: {score}</p>
+            </div>
         </div>
     );
 };
