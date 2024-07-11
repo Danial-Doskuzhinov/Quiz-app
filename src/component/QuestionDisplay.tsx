@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import QuizOptions from './QuizOptions';
 import QuizQuestion from './QuizQuestion';
 import type { QuestionDisplayProps } from '../../type';
+import { Html, Css, Js, Accessibility } from '../assets/index';
+import NotificationModal from './NotificationModal';
 
 const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     currentQuiz,
@@ -25,6 +27,19 @@ const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
         setShowResult(true);
         setIsClick(null)
     };
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const logo = [
+        { id: 0, icon: Html, name: 'Html' },
+        { id: 1, icon: Css, name: 'Css' },
+        { id: 2, icon: Js, name: 'Js' },
+        { id: 3, icon: Accessibility , name: 'Accessibility' }
+    ];
+
+    const getIconComponent = (iconName: string) => {
+        const logoItem = logo.find(logo => logo.name === iconName);
+        return logoItem ? logoItem.icon :'';
+    };
 
     const handleNextQuestion = () => {
         const nextIndex = currentQuestionIndex + 1;
@@ -37,6 +52,8 @@ const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
                 
             } else {
                 setShowResult(true);
+                setIsModalOpen(true);
+
             }
         }
     };
@@ -47,8 +64,12 @@ const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
 
     return (
         <div className="min-h-screen  p-8">
-            <div className="max-w-3xl mx-auto">
-                <h2 className="text-3xl font-bold mb-8">{currentQuiz.title}</h2>
+            <div className="max-w-3xl mx-auto">       
+            <a href="/" className='cursor-pointer '>                         
+            <img src={getIconComponent(currentQuiz.icon)} alt="" />
+                <h2 className="text-3xl font-bold mb-8">
+                    {currentQuiz.title}</h2>
+                    </a>  
                 <form onSubmit={handleAnswerSubmit}>
                     <QuizQuestion
                         question={currentQuestion.question}
@@ -76,6 +97,11 @@ const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
                 </form>
                 <p className="mt-4 text-xl">Score {score}</p>
             </div>
+            <NotificationModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                message={`Вы набрали ${score} из 10 баллов!`}
+            />
         </div>
     );
 };

@@ -9,7 +9,7 @@ body {
   }
   .custom-cursor {
     @apply cursor-pointer;
-    cursor: url("./assets/santa.svg"), pointer;
+    cursor: url("./assets/hand.svg"), pointer;
   }
   .dark body {
     @apply bg-gray-900 text-white;

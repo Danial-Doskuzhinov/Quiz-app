@@ -15,7 +15,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({ question, currentQuestionIn
             <p className="text-lg mt-2">{question}</p>
             <div className="w-full bg-gray-700 rounded-full h-2.5 mt-4">
                 <div
-                    className="bg-purple-600 h-2.5 rounded-full"
+                    className="bg-purple-600 h-2.5 rounded-full transition-width duration-1000 ease-in-out"
                     style={{ width: `${progressPercentage}%` }}
                 ></div>
             </div>

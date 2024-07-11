@@ -20,6 +20,7 @@ const QuizSelection: React.FC<QuizSelectionProps> = ({ quizzes, handleStartQuiz 
     };
 
     return (
+        <div className='min-w-screen'>
         <div className='flex'>
             <h2 className='text-[65px] ml-[7rem] w-[470px] mr-[6rem] mt-[10rem]'>Welcome to the Frontend Quiz!
 </h2>
@@ -36,6 +37,7 @@ const QuizSelection: React.FC<QuizSelectionProps> = ({ quizzes, handleStartQuiz 
                     </button>
                 ))}
             </div>
+        </div>
         </div>
     );
 };
