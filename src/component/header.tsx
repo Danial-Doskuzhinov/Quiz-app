@@ -1,6 +1,5 @@
 import  { useState } from 'react';
 import quizzesData from '../../data.json';
-// import Header from './Header';
 import QuizSelection from './QuizSelection';
 import QuestionDisplay from './QuestionDisplay';
 import DarkMode from './DarkMode';
@@ -21,6 +20,7 @@ const QuizApp = () => {
     const [selectedOption, setSelectedOption] = useState('');
     const [showResult, setShowResult] = useState(false);
     const [score, setScore] = useState(0);
+    const [isClick, setIsClick] = useState<number | null>(null);
 
     const handleStartQuiz = (quizTitle: string) => {
         const quiz = quizzesData.quizzes.find((quiz) => quiz.title === quizTitle);
@@ -33,7 +33,8 @@ const QuizApp = () => {
         }
     };
     return (
-        <div className='div'>
+        <div className='mt-[4rem]'>
+            
           <DarkMode/>
            {!currentQuiz?.title?<> <QuizSelection quizzes={quizzesData.quizzes} handleStartQuiz={handleStartQuiz} /></>:<>
           <></>
@@ -47,6 +48,8 @@ const QuizApp = () => {
                 score={score}
                 setScore={setScore}
                 setCurrentQuestionIndex={setCurrentQuestionIndex}
+                setIsClick={setIsClick}
+                isClick={isClick}
             />
            </>}          
         </div>

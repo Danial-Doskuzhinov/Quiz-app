@@ -1,3 +1,4 @@
+import {  } from "./src/assets/icon-html.svg";
 export type QQuiz = {
     title: string;
     icon: string;
@@ -17,6 +18,8 @@ export type QuestionDisplayProps = {
     score: number;
     setScore: React.Dispatch<React.SetStateAction<number>>;
     setCurrentQuestionIndex: React.Dispatch<React.SetStateAction<number>>;
+    setIsClick: React.Dispatch<React.SetStateAction<number|null>>;
+    isClick:number|null
 };
 
   export type next = {

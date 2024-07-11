@@ -46,7 +46,7 @@ const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     const currentQuestion = currentQuiz.questions[currentQuestionIndex];
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-8">
+        <div className="min-h-screen  p-8">
             <div className="max-w-3xl mx-auto">
                 <h2 className="text-3xl font-bold mb-8">{currentQuiz.title}</h2>
                 <form onSubmit={handleAnswerSubmit}>
@@ -65,16 +65,16 @@ const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
                         isClick={isClick}
                     />
                     {!showResult ? 
-                        <button type="submit" className="w-full p-4 bg-purple-600 rounded-lg text-white font-bold">
+                        <button type="submit" className="w-full p-4 bg-purple-600 rounded-lg  font-bold">
                             Submit answer
                         </button>
                      : 
-                      <>  <button onClick={handleNextQuestion} className="w-full mt-4 p-4 bg-purple-600 rounded-lg text-white font-bold">
+                      <>  <button onClick={handleNextQuestion} className="w-full mt-4 p-4 bg-purple-600 rounded-lg  font-bold">
                       Next Question
                   </button></>
                     }
                 </form>
-                <p className="mt-4 text-xl">Score: {score}</p>
+                <p className="mt-4 text-xl">Score {score}</p>
             </div>
         </div>
     );

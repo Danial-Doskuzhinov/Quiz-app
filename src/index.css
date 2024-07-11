@@ -1,28 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 body {
-  display: flex;
-  align-items: center;
+    @apply bg-white text-black ;
+    background-image: url("./assets/pattern-background-desktop-light (1).svg");
+  }
+  .custom-cursor {
+    @apply cursor-pointer;
+    cursor: url("./assets/santa.svg"), pointer;
+  }
+  .dark body {
+    @apply bg-gray-900 text-white;
+    background-image: url("./assets/pattern-background-desktop-dark (1).svg");
+  }
   
-  background-color:#fff;
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h3{
-  color: red;
-}
-.h6{
-  color: red;
-}
-.dark{
-  background-color: #333;
-  color: #fff;
-}
-.container{
-  margin-top: 60px;
-  margin-left: 420px;
-  
-}
