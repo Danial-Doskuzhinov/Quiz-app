@@ -13,7 +13,7 @@ const NotificationModal: React.FC<NotificationModalProps> = ({ isOpen, onClose, 
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
             <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
                 <div className="flex justify-end">
-                    <a href="/">
+                    <a href="https://danial-doskuzhinov.github.io/Quiz-app">
                     <button onClick={onClose} className="text-gray-400 hover:text-gray-200">&times;</button>
                     </a>
                 </div>
