@@ -65,7 +65,7 @@ const QuestionDisplay: React.FC<QuestionDisplayProps> = ({
     return (
         <div className="min-h-screen  p-8">
             <div className="max-w-3xl mx-auto">       
-            <a href="/Quiz-app" className='cursor-pointer '>                         
+            <a href="https://danial-doskuzhinov.github.io/Quiz-app" className='cursor-pointer '>                         
             <img src={getIconComponent(currentQuiz.icon)} alt="" />
                 <h2 className="text-3xl font-bold mb-8">
                     {currentQuiz.title}</h2>
