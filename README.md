@@ -1,3 +1,5 @@
+![image](https://github.com/Danial-Doskuzhinov/Quiz-app/assets/143175394/19f998dc-54c8-4832-89dc-e916174cf177)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
